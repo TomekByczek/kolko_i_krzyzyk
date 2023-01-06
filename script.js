@@ -6,13 +6,16 @@ function onFieldClicked(event) {
     var row = event.srcElement.dataset.row
     var col = event.srcElement.dataset.col
     var result = isFieldEmpty(row, col)
-    if (result == true){
-        if (xOrO == false){
+    if (result == true) {
+        if (xOrO == false) {
             table[row][col] = false
-        } else { 
-            table[row][col] = true
+            event.srcElement.innerHTML = 'X'
         }
-    } else{
+        else {
+            table[row][col] = true
+            event.srcElement.innerHTML = 'O'
+        }
+    } else {
         alert('Tu już coś jest')
     }
     console.log(event)
@@ -30,7 +33,7 @@ function startgame() {
     table.push([undefined, undefined, undefined])
     table.push([undefined, undefined, undefined])
     alert('Gra rozpoczęta')
-    
+
 }
 function endgame() {
     isgameactiv = false
@@ -61,7 +64,7 @@ function isFieldEmpty(row, col) {
         return true
     else return false
 }
-function initFieldHandlers(){
+function initFieldHandlers() {
     var gameFields = document.getElementsByTagName('td')
     for (var i = 0; gameFields.length > i; i++) {
         gameFields[i].addEventListener('click', onFieldClicked);
