@@ -52,6 +52,7 @@ function startgame() {
     table.push([undefined, undefined, undefined])
     table.push([undefined, undefined, undefined])
     table.push([undefined, undefined, undefined])
+    clinerFields();
      alert('Gra rozpoczęta')
 
 }
@@ -90,11 +91,22 @@ function initFieldHandlers() {
         gameFields[i].addEventListener('click', onFieldClicked);
     }
 }
-function clinerField(){
-   var field = document.getElementsByTagName('td')
-   field.innerHTML ='100px';
+function clinerFields(){
+   var fields = document.getElementsByTagName('td')
+   console.log(fields)
+   for (var i = 0; fields.length  > i ; i++) {
+    fields[i].innerHTML = ''
+   }
+Function gameNoWiner() {
+    
+    for (var row = 0; table.length > row ;row++) {
+    for (var col = 0; table[row].length > col; col++){
+        Table[row][col]
+    }
+    }
+}
+
     
    
    
 }
-document.getElementsByTagName('td')
