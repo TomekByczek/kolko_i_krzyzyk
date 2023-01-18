@@ -23,17 +23,19 @@ function onFieldClicked(event) {
             
         }
     } else {
-        alert('Tu już coś jest')
+        showMessage('Znajdź puste pole')
         
     }
     var winner = isWinner()
+    var freeFields = isFreeFields()
+    console.log(freeFields)
     if(winner == true){
         showMessage('Wygrało O');
     }
     if(winner == false){
         showMessage('Wygrał X');
     }
-    if(winner == null && freeFields !== true){
+    if(winner == null && freeFields == false){
     
         showMessage('Remis, zagraj jeszcze raz');
     }
@@ -49,14 +51,14 @@ function startgame() {
     table.push([undefined, undefined, undefined])
     table.push([undefined, undefined, undefined])
     clinerFields();
-     alert('Gra rozpoczęta')
+    showMessage('Gra rozpoczęta')
 
 }
 function endgame() {
     isgameactiv = false
     document.getElementById('game'), game.style.display = 'none';
     document.getElementById('newgame'), newgame.disabled = false;
-    alert('Gra zakonczona')
+    showMessage('Gra zakonczona')
 }
 function fieldcheck(row, col) {
     if (row < 1 || row > 3) {
@@ -129,15 +131,19 @@ function isWinner() {
     return false 
     else return null
 }
-
+//function sprawdz(){
+    table.indexOf(undefined)
+//}
 function isFreeFields() {
     for (var row = 0; table.length > row ;row++) {
-    for (var col = 0; table[row].length > col; col++){
-        if(table[row][col]==undefined)
-        console.log(table[row][col])
+       var index = table[row].indexOf(undefined)
+        if (index >= 0){
+           return true ;
+        }
+    }
+ return false
     
-    }
-    }
+    
 }
 function showMessage(message){
     document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>'+message;
