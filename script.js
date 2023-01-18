@@ -11,43 +11,39 @@ function onFieldClicked(event) {
             table[row][col] = false
             event.srcElement.innerHTML = 'X'
             xOrO = true
-            document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra O';
+            showMessage('Gra rozpoczęta! Gra O')
+            //document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra O';
         }
         else {
             table[row][col] = true
             event.srcElement.innerHTML = 'O'
             xOrO = false
-            document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra X';
+            showMessage('Gra rozpoczęta! Gra X')
+            //document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra X';
+            
         }
     } else {
         alert('Tu już coś jest')
+        
     }
-    if (table[0][0] == true && table[0][1] == true && table[0][2] == true ) {alert('wygrywa kółko')}
-    if (table[1][0] == true && table[1][1] == true && table[1][2] == true ) {alert('wygrywa kółko')}
-    if (table[2][0] == true && table[2][1] == true && table[2][2] == true ) {alert('wygrywa kółko')}
-    if (table[0][0] == true && table[1][0] == true && table[2][0] == true ) {alert('wygrywa kółko')}
-    if (table[0][1] == true && table[1][1] == true && table[2][1] == true ) {alert('wygrywa kółko')}
-    if (table[0][2] == true && table[1][2] == true && table[2][2] == true ) {alert('wygrywa kółko')}
-    if (table[0][0] == true && table[1][1] == true && table[2][2] == true ) {alert('wygrywa kółko')}
-    if (table[0][2] == true && table[1][1] == true && table[2][0] == true ) {alert('wygrywa kółko')}
-    if (table[0][0] == false && table[0][1] == false && table[0][2] == false ) {alert('wygrywa krzyżyk')}
-    if (table[1][0] == false && table[1][1] == false && table[1][2] == false ) {alert('wygrywa krzyżyk')}
-    if (table[2][0] == false && table[2][1] == false && table[2][2] == false ) {alert('wygrywa krzyżyk')}
-    if (table[0][0] == false && table[1][0] == false && table[2][0] == false ) {alert('wygrywa krzyżyk')}
-    if (table[0][1] == false && table[1][1] == false && table[2][1] == false ) {alert('wygrywa krzyżyk')}
-    if (table[0][2] == false && table[1][2] == false && table[2][2] == false ) {alert('wygrywa krzyżyk')}
-    if (table[0][0] == false && table[1][1] == false && table[2][2] == false ) {alert('wygrywa krzyżyk')}
-    if (table[0][2] == false && table[1][1] == false && table[2][0] == false ) {alert('wygrywa krzyżyk')}
-    console.log(event)
+    var winner = isWinner()
+    if(winner == true){
+        showMessage('Wygrało O');
+    }
+    if(winner == false){
+        showMessage('Wygrał X');
+    }
+    if(winner == null && freeFields !== true){
+    
+        showMessage('Remis, zagraj jeszcze raz');
+    }
 }
-
-
 function startgame() {
     table = []
     isgameactiv = true
     document.getElementById('game'), game.style.display = 'block';
     xOrO = false;
-    document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra X';
+    showMessage('Gra rozpoczęta! Gra X');
     document.getElementById('newgame'), newgame.disabled = true;
     table.push([undefined, undefined, undefined])
     table.push([undefined, undefined, undefined])
@@ -97,16 +93,58 @@ function clinerFields(){
    for (var i = 0; fields.length  > i ; i++) {
     fields[i].innerHTML = ''
    }
-Function gameNoWiner() {
-    
-    for (var row = 0; table.length > row ;row++) {
-    for (var col = 0; table[row].length > col; col++){
-        Table[row][col]
-    }
-    }
+}
+function isWinner() {
+    if (table[0][0] == true && table[0][1] == true && table[0][2] == true)
+     return true
+    if (table[1][0] == true && table[1][1] == true && table[1][2] == true)
+     return true
+    if (table[2][0] == true && table[2][1] == true && table[2][2] == true )
+    return true
+    if (table[0][0] == true && table[1][0] == true && table[2][0] == true )
+    return true
+    if (table[0][1] == true && table[1][1] == true && table[2][1] == true )
+    return true
+    if (table[0][2] == true && table[1][2] == true && table[2][2] == true )
+    return true
+    if (table[0][0] == true && table[1][1] == true && table[2][2] == true )
+    return true
+    if (table[0][2] == true && table[1][1] == true && table[2][0] == true ) 
+    return true
+    if (table[0][0] == false && table[0][1] == false && table[0][2] == false )
+     return false 
+    if (table[1][0] == false && table[1][1] == false && table[1][2] == false )
+    return false 
+    if (table[2][0] == false && table[2][1] == false && table[2][2] == false )
+    return false 
+    if (table[0][0] == false && table[1][0] == false && table[2][0] == false )
+    return false 
+    if (table[0][1] == false && table[1][1] == false && table[2][1] == false )
+    return false 
+    if (table[0][2] == false && table[1][2] == false && table[2][2] == false )
+    return false 
+    if (table[0][0] == false && table[1][1] == false && table[2][2] == false )
+    return false 
+    if (table[0][2] == false && table[1][1] == false && table[2][0] == false ) 
+    return false 
+    else return null
 }
 
+function isFreeFields() {
+    for (var row = 0; table.length > row ;row++) {
+    for (var col = 0; table[row].length > col; col++){
+        if(table[row][col]==undefined)
+        console.log(table[row][col])
     
-   
-   
+    }
+    }
 }
+function showMessage(message){
+    document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>'+message;
+}
+//}
+//function gameNoWinner() {
+//for (var row = 0; table.length > row ;row++) {
+    //for (var col = 0; table[row].length > col; col++)
+   // isFieldEmpty(row, col)}
+//}
