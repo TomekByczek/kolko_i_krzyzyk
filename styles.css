@@ -86,3 +86,12 @@ td
     height: 50px;
     width: 50px;
 }
+#newgame {
+    color:brown;
+}
+#start {
+    color: darkgreen;
+}
+#end {
+    color: rgb(0, 100, 0);
+}
