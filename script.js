@@ -48,7 +48,7 @@ function startgame() {
     document.getElementById('game'), game.style.display = 'block';
     xOrO = false;
     showMessage('Gra rozpoczęta! Gra X');
-    document.getElementById('newgame'), newgame.disabled = true;
+    document.getElementById('newgame'), newgame.disabled = true, newgame.style.display = 'none';
     table.push([undefined, undefined, undefined])
     table.push([undefined, undefined, undefined])
     table.push([undefined, undefined, undefined])
@@ -58,7 +58,7 @@ function startgame() {
 function endgame() {
     isgameactiv = false
     document.getElementById('game'), game.style.display = 'none';
-    document.getElementById('newgame'), newgame.disabled = false;
+    document.getElementById('newgame'), newgame.disabled = false, newgame.style.display = 'block';
     showMessage('Gra zakonczona')
 }
 function fieldcheck(row, col) {
