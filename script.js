@@ -13,25 +13,21 @@ function onFieldClicked(event) {
                 event.srcElement.innerHTML = 'X'
                 xOrO = true
                 showMessage('Gra rozpoczęta! Gra O')
-                //document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra O';
             }
             else {
                 table[row][col] = true
                 event.srcElement.innerHTML = 'O'
                 xOrO = false
                 showMessage('Gra rozpoczęta! Gra X')
-                //document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra X';
-
             }
         } else {
             showMessage('Znajdź puste pole')
-
         }
     }
-
     var winner = isWinner()
     var freeFields = isFreeFields()
     console.log(freeFields)
+    //?
     if (winner == true) {
         showMessage('Wygrało O');
         isgameactiv = false
@@ -58,7 +54,6 @@ function startgame() {
     table.push([undefined, undefined, undefined])
     clinerFields();
     showMessage('Gra rozpoczęta')
-
 }
 function endgame() {
     isgameactiv = false
@@ -98,6 +93,7 @@ function initFieldHandlers() {
 function clinerFields() {
     var fields = document.getElementsByTagName('td')
     console.log(fields)
+    //?
     for (var i = 0; fields.length > i; i++) {
         fields[i].innerHTML = ''
     }
@@ -137,9 +133,8 @@ function isWinner() {
         return false
     else return null
 }
-//function sprawdz(){
 table.indexOf(undefined)
-//}
+// ?
 function isFreeFields() {
     for (var row = 0; table.length > row; row++) {
         var index = table[row].indexOf(undefined)
@@ -148,15 +143,7 @@ function isFreeFields() {
         }
     }
     return false
-
-
 }
 function showMessage(message) {
     document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>' + message;
 }
-//}
-//function gameNoWinner() {
-//for (var row = 0; table.length > row ;row++) {
-    //for (var col = 0; table[row].length > col; col++)
-   // isFieldEmpty(row, col)}
-//}
