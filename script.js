@@ -6,38 +6,44 @@ function onFieldClicked(event) {
     var row = event.srcElement.dataset.row
     var col = event.srcElement.dataset.col
     var result = isFieldEmpty(row, col)
-    if (result == true) {
-        if (xOrO == false) {
-            table[row][col] = false
-            event.srcElement.innerHTML = 'X'
-            xOrO = true
-            showMessage('Gra rozpoczęta! Gra O')
-            //document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra O';
+    if (isgameactiv == true) {
+        if (result == true) {
+            if (xOrO == false) {
+                table[row][col] = false
+                event.srcElement.innerHTML = 'X'
+                xOrO = true
+                showMessage('Gra rozpoczęta! Gra O')
+                //document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra O';
+            }
+            else {
+                table[row][col] = true
+                event.srcElement.innerHTML = 'O'
+                xOrO = false
+                showMessage('Gra rozpoczęta! Gra X')
+                //document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra X';
+
+            }
+        } else {
+            showMessage('Znajdź puste pole')
+
         }
-        else {
-            table[row][col] = true
-            event.srcElement.innerHTML = 'O'
-            xOrO = false
-            showMessage('Gra rozpoczęta! Gra X')
-            //document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>Gra rozpoczęta! Gra X';
-            
-        }
-    } else {
-        showMessage('Znajdź puste pole')
-        
     }
+
     var winner = isWinner()
     var freeFields = isFreeFields()
     console.log(freeFields)
-    if(winner == true){
+    if (winner == true) {
         showMessage('Wygrało O');
+        isgameactiv = false
     }
-    if(winner == false){
+    if (winner == false) {
         showMessage('Wygrał X');
+        isgameactiv = false
     }
-    if(winner == null && freeFields == false){
-    
+    if (winner == null && freeFields == false) {
+
         showMessage('Remis, zagraj jeszcze raz');
+        isgameactiv = false
     }
 }
 function startgame() {
@@ -89,64 +95,64 @@ function initFieldHandlers() {
         gameFields[i].addEventListener('click', onFieldClicked);
     }
 }
-function clinerFields(){
-   var fields = document.getElementsByTagName('td')
-   console.log(fields)
-   for (var i = 0; fields.length  > i ; i++) {
-    fields[i].innerHTML = ''
-   }
+function clinerFields() {
+    var fields = document.getElementsByTagName('td')
+    console.log(fields)
+    for (var i = 0; fields.length > i; i++) {
+        fields[i].innerHTML = ''
+    }
 }
 function isWinner() {
     if (table[0][0] == true && table[0][1] == true && table[0][2] == true)
-     return true
+        return true
     if (table[1][0] == true && table[1][1] == true && table[1][2] == true)
-     return true
-    if (table[2][0] == true && table[2][1] == true && table[2][2] == true )
-    return true
-    if (table[0][0] == true && table[1][0] == true && table[2][0] == true )
-    return true
-    if (table[0][1] == true && table[1][1] == true && table[2][1] == true )
-    return true
-    if (table[0][2] == true && table[1][2] == true && table[2][2] == true )
-    return true
-    if (table[0][0] == true && table[1][1] == true && table[2][2] == true )
-    return true
-    if (table[0][2] == true && table[1][1] == true && table[2][0] == true ) 
-    return true
-    if (table[0][0] == false && table[0][1] == false && table[0][2] == false )
-     return false 
-    if (table[1][0] == false && table[1][1] == false && table[1][2] == false )
-    return false 
-    if (table[2][0] == false && table[2][1] == false && table[2][2] == false )
-    return false 
-    if (table[0][0] == false && table[1][0] == false && table[2][0] == false )
-    return false 
-    if (table[0][1] == false && table[1][1] == false && table[2][1] == false )
-    return false 
-    if (table[0][2] == false && table[1][2] == false && table[2][2] == false )
-    return false 
-    if (table[0][0] == false && table[1][1] == false && table[2][2] == false )
-    return false 
-    if (table[0][2] == false && table[1][1] == false && table[2][0] == false ) 
-    return false 
+        return true
+    if (table[2][0] == true && table[2][1] == true && table[2][2] == true)
+        return true
+    if (table[0][0] == true && table[1][0] == true && table[2][0] == true)
+        return true
+    if (table[0][1] == true && table[1][1] == true && table[2][1] == true)
+        return true
+    if (table[0][2] == true && table[1][2] == true && table[2][2] == true)
+        return true
+    if (table[0][0] == true && table[1][1] == true && table[2][2] == true)
+        return true
+    if (table[0][2] == true && table[1][1] == true && table[2][0] == true)
+        return true
+    if (table[0][0] == false && table[0][1] == false && table[0][2] == false)
+        return false
+    if (table[1][0] == false && table[1][1] == false && table[1][2] == false)
+        return false
+    if (table[2][0] == false && table[2][1] == false && table[2][2] == false)
+        return false
+    if (table[0][0] == false && table[1][0] == false && table[2][0] == false)
+        return false
+    if (table[0][1] == false && table[1][1] == false && table[2][1] == false)
+        return false
+    if (table[0][2] == false && table[1][2] == false && table[2][2] == false)
+        return false
+    if (table[0][0] == false && table[1][1] == false && table[2][2] == false)
+        return false
+    if (table[0][2] == false && table[1][1] == false && table[2][0] == false)
+        return false
     else return null
 }
 //function sprawdz(){
-    table.indexOf(undefined)
+table.indexOf(undefined)
 //}
 function isFreeFields() {
-    for (var row = 0; table.length > row ;row++) {
-       var index = table[row].indexOf(undefined)
-        if (index >= 0){
-           return true ;
+    for (var row = 0; table.length > row; row++) {
+        var index = table[row].indexOf(undefined)
+        if (index >= 0) {
+            return true;
         }
     }
- return false
-    
-    
+    return false
+
+
 }
-function showMessage(message){
-    document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>'+message;
+function showMessage(message) {
+    document.getElementById('statusGame').innerHTML = 'Aktualny stan gry:<br>' + message;
 }
 //}
 //function gameNoWinner() {
